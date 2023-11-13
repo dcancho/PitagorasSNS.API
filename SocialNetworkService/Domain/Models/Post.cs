@@ -15,8 +15,8 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Models
         public IEnumerable<string>? AttachedMedia { get; set; }         // ObjectId of the media in MongoDB
         [BsonElement("Content")]
         public string Content { get; set; } = string.Empty;
-        [BsonElement("AuthorId")]
-        public string AuthorId { get; set; } = string.Empty;
+        [BsonElement("AuthorCode")]
+        public string AuthorCode { get; set; } = string.Empty;
         [BsonElement("Likes")]
         public int Likes { get; set; }
         [BsonElement("Dislikes")]

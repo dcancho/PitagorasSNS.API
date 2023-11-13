@@ -1,3 +1,4 @@
+using MongoDB.Driver;
 using PitagorasSNS.API.Shared.Infrastructure.Configuration;
 using PitagorasSNS.API.SocialNetworkService.Domain.Models;
 using PitagorasSNS.API.SocialNetworkService.Domain.Repositories;
@@ -8,6 +9,10 @@ namespace PitagorasSNS.API.Shared.Infrastructure.Repositories
     {
         public CourseRepository(AppDbContext context) : base(context, context.Courses)
         {
+        }
+        public Course GetCourseByCode(string code)
+        {
+            return _context.Courses.Find(c => c.CourseCode == code).FirstOrDefault();
         }
     }
 }

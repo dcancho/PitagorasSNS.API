@@ -13,6 +13,8 @@ namespace PitagorasSNS.API.Mapping
             CreateMap<StudentResource, Student>();
             CreateMap<TeacherResource, Teacher>();
             CreateMap<ScoresRecordResource, ScoresRecord>();
+            CreateMap<PostResource, Post>();
+            CreateMap<CourseResource, Course>();
         }
     }
 }

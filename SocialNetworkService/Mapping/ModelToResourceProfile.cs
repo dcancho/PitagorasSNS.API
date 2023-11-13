@@ -9,6 +9,11 @@ namespace PitagorasSNS.API.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Class, ClassResource>();
+            CreateMap<Course, CourseResource>();
+            CreateMap<ScoresRecord, ScoresRecordResource>();
+            CreateMap<Student, StudentResource>();
+            CreateMap<Teacher, TeacherResource>();
+            CreateMap<Post, PostResource>();
         }
     }
 }
