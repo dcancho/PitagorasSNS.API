@@ -10,8 +10,8 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Models
         public string Id { get; set; } = string.Empty;
         [BsonElement("Name")]
         public string Name { get; set; } = string.Empty;
-        [BsonElement("StudentId")]
-        public int StudentId { get; set; }
+        [BsonElement("StudentCode")]
+        public string StudentCode { get; set; }
         [BsonElement("Email")]
         public string Email { get; set; } = string.Empty;
         [BsonElement("Password")]

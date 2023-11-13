@@ -8,28 +8,17 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = string.Empty;
-
         [BsonElement("StudentId")]
-        public int StudentId { get; set; }
-
+        public string StudentId { get; set; } = string.Empty;
+        [BsonElement("StudentCode")]
+        public string StudentCode { get; set; } = string.Empty;
         [BsonElement("ClassId")]
-        public int ClassId { get; set; }
-
+        public string ClassId { get; set; } = string.Empty;
+        [BsonElement("CourseId")]
+        public string CourseId { get; set; } = string.Empty;
+        [BsonElement("CourseCode")]
+        public string CourseCode { get; set; } = string.Empty;
         [BsonElement("Score")]
         public float Score { get; set; }
-
-        public ScoresRecord(string Id, int StudentId, int ClassId, float Score)
-        {
-            this.Id = Id;
-            this.StudentId = StudentId;
-            this.ClassId = ClassId;
-            this.Score = Score;
-        }
-
-        public ScoresRecord() : this(string.Empty, 0, 0, 0) { }
-
-        public ScoresRecord(int StudentId, int ClassId, float Score) : this(string.Empty, StudentId, ClassId, Score) { }
-
-        public ScoresRecord(string Id, int StudentId, int ClassId) : this(Id, StudentId, ClassId, 0) { }
     }
 }

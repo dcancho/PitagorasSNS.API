@@ -16,7 +16,7 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Models
         [BsonElement("Content")]
         public string Content { get; set; } = string.Empty;
         [BsonElement("AuthorId")]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; } = string.Empty;
         [BsonElement("Likes")]
         public int Likes { get; set; }
         [BsonElement("Dislikes")]
