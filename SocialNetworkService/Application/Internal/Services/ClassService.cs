@@ -69,9 +69,7 @@ namespace PitagorasSNS.API.SocialNetworkService.Application.Internal.Services
 
         public async Task<ClassResponse> SaveAsync(SaveClassResource classResource)
         {
-            System.Console.WriteLine(classResource);
             var classModel = _mapper.Map<SaveClassResource, Class>(classResource);
-            System.Console.WriteLine(classModel);
             try
             {
                 await _classRepository.AddAsync(classModel);
