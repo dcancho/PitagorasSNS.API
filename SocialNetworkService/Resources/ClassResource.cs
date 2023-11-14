@@ -16,6 +16,5 @@
         public string TeacherCode {get; set;}
         public IEnumerable<string> StudentsEnrolledCode {get; set;}
         public string CourseCode {get; set;}
-        public float AverageClassScore {get; set;}
     }
 }

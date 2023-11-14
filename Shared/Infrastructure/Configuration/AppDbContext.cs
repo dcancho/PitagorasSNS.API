@@ -15,9 +15,9 @@ namespace PitagorasSNS.API.Shared.Infrastructure.Configuration
         /// </summary>
         /// <param name="connectionString">The MongoDB connection string.</param>
         /// <param name="databaseName">The name of the database.</param>
-        public AppDbContext(string connectionString, string databaseName)
+        public AppDbContext(IMongoClient mongoClient, string databaseName)
         {
-            var client = new MongoClient(connectionString);
+            var client = mongoClient;
             _db = client.GetDatabase(databaseName);
         }
 
