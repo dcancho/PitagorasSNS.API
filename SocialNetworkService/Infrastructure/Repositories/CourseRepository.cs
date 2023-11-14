@@ -10,9 +10,9 @@ namespace PitagorasSNS.API.Shared.Infrastructure.Repositories
         public CourseRepository(AppDbContext context) : base(context, context.Courses)
         {
         }
-        public Course GetCourseByCode(string code)
+        public async Task<Course> GetCourseByCode(string code)
         {
-            return _context.Courses.Find(c => c.CourseCode == code).FirstOrDefault();
+            return await _context.Courses.Find(c => c.CourseCode == code).FirstOrDefaultAsync();
         }
     }
 }

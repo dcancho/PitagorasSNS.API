@@ -5,6 +5,6 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Repositories
 {
     public interface ITeacherRepository : IBaseRepository<Teacher>
     {
-
+        public Task<Teacher> GetTeacherByCodeAsync(string code);
     }
 }

@@ -11,6 +11,14 @@ namespace PitagorasSNS.API.Shared.Infrastructure.Repositories
         {
 
         }
+
+        public async Task<bool> DeleteClassByCode(string code)
+        {
+            // Returns true if the resource was deleted. False if there wasn't a resource to delete.
+            var result = await _context.Classes.DeleteOneAsync(c => c.ClassCode == code);
+            return result.DeletedCount > 0;
+        }
+
         public async Task<Class> GetClassByCode(string code)
         {
             return await _context.Classes.Find(c => c.ClassCode == code).FirstOrDefaultAsync();
@@ -19,19 +27,10 @@ namespace PitagorasSNS.API.Shared.Infrastructure.Repositories
         {
             return await _context.Classes.Find(c => c.TeacherCode == code).ToListAsync();
         }
-        public async Task<IEnumerable<Course>> GetCoursesByStudentCodeAsync(string studentCode)
+        public async Task<IEnumerable<Class>> GetClassesByStudentCodeAsync(string studentCode)
         {
-            var classes = await _context.Classes
-                .Find(c => c.StudentsEnrolledCode.Contains(studentCode))
-                .ToListAsync();
-
-            var courseIds = classes.Select(c => c.CourseId);
-
-            var courses = await _context.Courses
-                .Find(c => courseIds.Contains(c.Id))
-                .ToListAsync();
-
-            return courses;
+            var classes = await _context.Classes.Find(c => c.StudentsEnrolledCode.Any(c => c == studentCode)).ToListAsync();
+            return classes;
         }
     }
 }
