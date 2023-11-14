@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using PitagorasSNS.API.Mapping;
 using PitagorasSNS.API.Shared.Infrastructure.Configuration;
