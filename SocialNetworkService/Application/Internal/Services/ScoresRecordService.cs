@@ -14,7 +14,20 @@ namespace PitagorasSNS.API.SocialNetworkService.Application.Internal.Services
 
         public async Task<ScoresRecordResponse> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var scoresRecord = await _scoresRecordRepository.FindByIdAsync(id);
+            if (scoresRecord == null)
+            {
+                return new ScoresRecordResponse("Scores record not found.");
+            }
+            try
+            {
+                _scoresRecordRepository.Remove(scoresRecord);
+                return new ScoresRecordResponse(_mapper.Map<ScoresRecord, ScoresRecordResource>(scoresRecord));
+            }
+            catch
+            {
+                return new ScoresRecordResponse("An error occurred when deleting the scores record.");
+            }
         }
 
         public async Task<ScoresRecordResource?> FindByStudentCodeAndCourseCodeAsync(string studentCode, string courseCode)

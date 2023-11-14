@@ -86,9 +86,12 @@ namespace PitagorasSNS.API.SocialNetworkService.Application.Internal.Services
             {
                 return new PostResponse("An error occurred when updating the post.");
             }
+        }
 
-            
-
+        public async Task<PostResource> FindByIdAsync(string id)
+        {
+            var post = await _postRepository.FindByIdAsync(id);
+            return _mapper.Map<Post, PostResource>(post);
         }
     }
 }

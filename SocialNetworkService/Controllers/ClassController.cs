@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using PitagorasSNS.API.SocialNetworkService.Domain.Services;
 using PitagorasSNS.API.SocialNetworkService.Domain.Services.Communication;
 using PitagorasSNS.API.SocialNetworkService.Resources;
-using System.Collections.Generic;
 
 namespace SocialNetworkService.Controllers
 {

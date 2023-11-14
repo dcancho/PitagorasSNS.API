@@ -5,6 +5,7 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Services
 {
     public interface IPostService
     {
+        Task<PostResource> FindByIdAsync(string id);
         Task<IEnumerable<PostResource>> ListAllAsync();
         Task<IEnumerable<PostResource>> ListByAuthorCodeAsync(string authorCode);
         Task<IEnumerable<PostResource>> ListTopPostsAsync(int limit = 10);
