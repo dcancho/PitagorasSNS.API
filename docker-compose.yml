@@ -1,16 +1,17 @@
-version: '3.4'
+version: '3.8'
 services:
   web:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+    image: pitagorassns_api
     ports:
-      - "80:80"
+      - '80:80'
     depends_on:
-      - db
-  db:
-    image: mongo:latest
+      - pitagorassns_data
+  mongodb:
+    image: mongo
+    container_name: pitagorassns_data
+    ports:
+      - '27017:27017'
     volumes:
-      - pitagorassns_data:/data/db
+      - mongodb-data:/data/db
+volumes:
+  mongodb-data:
