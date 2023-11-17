@@ -1,12 +1,17 @@
-# Use the official Microsoft .NET 7.0 SDK image to build the application
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY . .
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app
+# Use the official Microsoft .NET Core runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
-# Use the official Microsoft .NET 7.0 runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+# Set the working directory in the Docker container
 WORKDIR /app
-COPY --from=build /app .
+
+# Copy the published app to the working directory
+COPY ./publish .
+
+# Set the ASPNETCORE_ENVIRONMENT variable to Production
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+# Expose port 80 for the app
+EXPOSE 80
+
+# Start the app
 ENTRYPOINT ["dotnet", "PitagorasSNS.API.dll"]

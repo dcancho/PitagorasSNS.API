@@ -22,14 +22,11 @@ namespace PitagorasSNS.API
             builder.Services.AddSwaggerGen();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            const string databaseName = "dev_pitagorassns";
-            builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
+            var client = new MongoClient(connectionString);
+            var databaseName = new MongoUrl(connectionString).DatabaseName;
 
-            builder.Services.AddScoped<AppDbContext>(sp =>
-            {
-                var client = sp.GetRequiredService<IMongoClient>();
-                return new AppDbContext(client, databaseName);
-            });
+            builder.Services.AddSingleton<IMongoClient>(client);
+            builder.Services.AddScoped<AppDbContext>(sp => new AppDbContext(client, databaseName));
 
             builder.Services.AddScoped<IClassRepository, ClassRepository>();
             builder.Services.AddScoped<IClassService, ClassService>();
@@ -52,6 +49,7 @@ namespace PitagorasSNS.API
 
             if (app.Environment.IsDevelopment())
             {
+                System.Console.WriteLine("Development environment");
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
