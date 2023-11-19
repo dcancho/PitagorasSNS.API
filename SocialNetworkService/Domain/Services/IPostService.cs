@@ -12,5 +12,7 @@ namespace PitagorasSNS.API.SocialNetworkService.Domain.Services
         Task<PostResponse> SaveAsync(SavePostResource post);
         Task<PostResponse> UpdateAsync(string id, SavePostResource post);
         Task<PostResponse> DeleteAsync(string id);
+        Task<PostResponse> AddLikeAsync(string id);
+        Task<PostResponse> AddCommentAsync(string id, string comment);
     }
 }

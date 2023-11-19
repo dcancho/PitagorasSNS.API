@@ -78,7 +78,8 @@ namespace PitagorasSNS.API.SocialNetworkService.Application.Internal.Services
 
             resource.Content = post.Content;
 
-            try{
+            try
+            {
                 _postRepository.Update(resource);
                 return new PostResponse(_mapper.Map<Post, PostResource>(resource));
             }
@@ -91,7 +92,58 @@ namespace PitagorasSNS.API.SocialNetworkService.Application.Internal.Services
         public async Task<PostResource> FindByIdAsync(string id)
         {
             var post = await _postRepository.FindByIdAsync(id);
+            if (post == null)
+            {
+                return null;
+            }
             return _mapper.Map<Post, PostResource>(post);
+        }
+
+        public async Task<PostResponse> AddLikeAsync(string id)
+        {
+            var post = await _postRepository.FindByIdAsync(id);
+            if (post == null)
+            {
+                return new PostResponse("Post not found.");
+            }
+            try
+            {
+                post.Likes++;
+                _postRepository.Update(post);
+                return new PostResponse(_mapper.Map<Post, PostResource>(post));
+            }
+            catch
+            {
+                return new PostResponse("An error occurred when adding the like.");
+            }
+        }
+
+        public async Task<PostResponse> AddCommentAsync(string id, string comment)
+        {
+            var post = await _postRepository.FindByIdAsync(id);
+            if (post == null)
+            {
+                return new PostResponse("Post not found.");
+            }
+            try
+            {
+                if (post.Comments == null)
+                {
+                    post.Comments = new List<string> { comment };
+                }
+                else
+                {
+                    post.Comments = post.Comments.Append(comment).ToList();
+                }
+
+                _postRepository.Update(post);
+                return new PostResponse(_mapper.Map<Post, PostResource>(post));
+            }
+            catch
+            {
+                return new PostResponse("An error occurred when adding the comment.");
+            }
         }
     }
 }
+

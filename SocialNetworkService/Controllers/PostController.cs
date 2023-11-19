@@ -41,6 +41,22 @@ namespace PitagorasSNS.API.SocialNetworkService.Controllers
             return Ok(response);
         }
 
+        // PUT api/v1/Post/5/like
+        [HttpPut("{id}/like")]
+        public async Task<ActionResult<PostResponse>> PutLike(string id)
+        {
+            var response = await _postService.AddLikeAsync(id);
+            return Ok(response);
+        }
+
+        // PUT api/v1/Post/5/comment
+        [HttpPut("{id}/comment")]
+        public async Task<ActionResult<PostResponse>> PutComment(string id, [FromBody] string comment)
+        {
+            var response = await _postService.AddCommentAsync(id, comment);
+            return Ok(response);
+        }
+
         // POST: api/v1/Post
         [HttpPost]
         public async Task<ActionResult<PostResponse>> Post([FromBody] SavePostResource value)
