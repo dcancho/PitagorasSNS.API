@@ -40,10 +40,21 @@ namespace PitagorasSNS.API
             builder.Services.AddScoped<IStudentService, StudentService>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
             builder.Services.AddScoped<ICourseService, CourseService>();
-            
+
             builder.Services.AddAutoMapper(typeof(ResourceToModelProfile), typeof(ModelToResourceProfile));
-            
-            
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
+
 
             var app = builder.Build();
 
@@ -55,10 +66,11 @@ namespace PitagorasSNS.API
             }
 
             app.UseHttpsRedirection();
-        app.UseAuthorization();
-        app.MapControllers();
+            app.UseCors("AllowAllOrigins");
+            app.UseAuthorization();
+            app.MapControllers();
 
-        app.Run();
+            app.Run();
         }
     }
 }
