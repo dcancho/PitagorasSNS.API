@@ -1,5 +1,5 @@
 # Use the official Microsoft .NET Core runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 # Set the working directory in the Docker container
 WORKDIR /app

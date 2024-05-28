@@ -21,7 +21,24 @@ namespace PitagorasSNS.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            var environment = builder.Environment.EnvironmentName;
+
+            string connectionString;
+            try
+            {
+                if (environment == "Production")
+                {
+                    connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
+                }
+                else
+                {
+                    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting connection string", ex);
+            }
             var client = new MongoClient(connectionString);
             var databaseName = new MongoUrl(connectionString).DatabaseName;
 
