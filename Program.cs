@@ -74,13 +74,9 @@ namespace PitagorasSNS.API
 
 
             var app = builder.Build();
-
-            if (app.Environment.IsDevelopment())
-            {
-                System.Console.WriteLine("Development environment");
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+			
+			app.UseSwagger();
+			app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             app.UseCors("AllowAllOrigins");
